@@ -8,6 +8,7 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="book_add.php">
+              <input type="hidden" name="id" class="id" id="id" value="">
           		  <div class="form-group">
                   	<label for="book_id" class="col-sm-3 control-label">Book ID</label>
 
@@ -74,59 +75,57 @@
           	</div>
           	<div class="modal-body">
             	<form class="form-horizontal" method="POST" action="book_edit.php">
-            		<input type="hidden" class="book_id" name="id">
-                <div class="form-group">
-                    <label for="edit_isbn" class="col-sm-3 control-label">Book ID</label>
+              <input type="hidden" class="book_id" name="id" id="id" value="<?php echo $row['book'] ?>">
+                    <div class="form-group">
+                        <label for="edit_isbn" class="col-sm-3 control-label">Book ID</label>
 
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_isbn" name="book_id">
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="edit_isbn" name="book_id">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_title" class="col-sm-3 control-label">Title</label>
+
+                        <div class="col-sm-9">
+                          <textarea class="form-control" name="title" id="edit_title"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category" class="col-sm-3 control-label">Category</label>
+
+                        <div class="col-sm-9">
+                        <select class="form-control" name="category" id="category">
+                          <option value="" selected id="catselect"></option>
+                          <?php
+                            $sql = "SELECT * FROM category";
+                            $query = $conn->query($sql);
+                            while($crow = $query->fetch_assoc()){
+                              echo "<option value='".$crow['name']."'>".$crow['name']."</option>";
+                            }
+                          ?>
+                        </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_author" class="col-sm-3 control-label">Author</label>
+
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="edit_author" name="author">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit_donate" class="col-sm-3 control-label">Donated By:</label>
+
+                        <div class="col-sm-9">
+                          <input type="text" class="form-control" id="edit_donate" name="donate">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="edit_title" class="col-sm-3 control-label">Title</label>
-
-                    <div class="col-sm-9">
-                      <textarea class="form-control" name="title" id="edit_title"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="category" class="col-sm-3 control-label">Category</label>
-
-                    <div class="col-sm-9">
-                      <select class="form-control" name="category" id="category">
-                        <option value="" selected id="catselect"></option>
-                        <?php
-                          $sql = "SELECT * FROM category";
-                          $query = $conn->query($sql);
-                          while($crow = $query->fetch_assoc()){
-                            echo "
-                              <option value='".$crow['id']."'>".$crow['name']."</option>
-                            ";
-                          }
-                        ?>
-                      </select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_author" class="col-sm-3 control-label">Author</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_author" name="author">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="edit_publisher" class="col-sm-3 control-label">Donated By:</label>
-
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="edit_donate" name="donate">
-                    </div>
-                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                  <button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i> Update</button>
           	</div>
-          	<div class="modal-footer">
-            	<button type="button" class="btn btn-default btn-flat pull-left" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
-            	<button type="submit" class="btn btn-success btn-flat" name="edit"><i class="fa fa-check-square-o"></i> Update</button>
-            	</form>
-          	</div>
+            </form>
         </div>
     </div>
 </div>
