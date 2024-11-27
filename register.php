@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add'])) {
 </head>
 <body>
     <div class="container">
-        <img src="logomalino.png" alt="logo" class="logo">
+        <img src="Westfields Badge.png" alt="logo" class="logo">
         <div class="form-container">
             <h2>Register</h2>
 

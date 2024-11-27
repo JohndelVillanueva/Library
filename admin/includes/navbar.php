@@ -1,6 +1,6 @@
 <header class="main-header">
   <a href="home.php" class="logo">
-    <span class="logo-lg"><b><img src="image/logomalino.png" alt="Logo of Malino" style="width: 25px; height: auto;" /> MNHS Library</b></span>
+    <span class="logo-lg"><b><img src="../Westfields Badge.png" alt="Logo of Malino" style="width: 25px; height: auto;" /> Library Admin</b></span>
   </a>
   <nav class="navbar navbar-static-top">
     <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
