@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="student_edit.php">
-                <input type="hidden" class="studid" name="id">
+              <input type="hidden" class="book_id" name="id" id="id" value="<?php echo isset($row['id']) ? $row['id'] : ''; ?>">
                 <div class="form-group">
                     <label for="edit_firstname" class="col-sm-3 control-label">Firstname</label>
 
@@ -44,7 +44,7 @@
             </div>
             <div class="modal-body">
               <form class="form-horizontal" method="POST" action="student_delete.php">
-                <input type="hidden" class="studid" name="id">
+              <input type="hidden" name="id" id="delete_id">
                 <div class="text-center">
                     <p>DELETE STUDENT</p>
                     <h2 class="del_stu bold"></h2>

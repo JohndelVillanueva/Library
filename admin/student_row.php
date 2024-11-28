@@ -1,12 +1,16 @@
 <?php 
-	include 'includes/session.php';
+    include 'includes/session.php';
 
-	if(isset($_POST['id'])){
-		$id = $_POST['id'];
-		$sql = "SELECT * FROM users WHERE user_id = id";
-		$query = $conn->query($sql);
-		$row = $query->fetch_assoc();
+    if(isset($_POST['id'])){
+        $id = $_POST['id'];
 
-		echo json_encode($row);
-	}
+        // Use prepared statements to prevent SQL injection
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->bind_param("i", $id); // Assuming user_id is an integer
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        echo json_encode($row);
+    }
 ?>

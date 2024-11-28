@@ -65,8 +65,8 @@
                             <td>".$row['firstname']."</td>
                             <td>".$row['lastname']."</td>
                             <td>
-                              <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['user_id']."'><i class='fa fa-edit'></i> Edit</button>
-                              <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['user_id']."'><i class='fa fa-trash'></i> Delete</button>
+                              <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['id']."'><i class='fa fa-edit'></i> Edit</button>
+                              <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
                             </td>
                           </tr>
                         ";
@@ -97,9 +97,9 @@
       });
 
       $(document).on('click', '.delete', function(e){
-        e.preventDefault();
-        $('#delete').modal('show');
         var id = $(this).data('id');
+        $('#delete_id').val(id);
+        $('#delete').modal('show');
         getRow(id);
       });
     });
@@ -111,13 +111,24 @@
         data: {id: id},
         dataType: 'json',
         success: function(response) {
-          $('.studid').val(response.studid);
+      if (response && response.id) {
+        // Log the response for debugging
+        console.log(response); // Check the response in the browser console
+
+        
+          $('#id').val(response.id);
           $('#edit_firstname').val(response.firstname);
           $('#edit_lastname').val(response.lastname);
           $('.del_stu').html(response.firstname + ' ' + response.lastname);
-        }
-      });
+      }else{
+
+      }
+      } ,
+    error: function(jqXHR, textStatus, errorThrown) {
+      console.log(textStatus, errorThrown);
     }
+    });
+  }
   </script>
 
 </body>

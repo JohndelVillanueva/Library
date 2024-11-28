@@ -22,6 +22,9 @@ if (isset($_POST['id']) && is_numeric($_POST['id'])) {
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
 
+            // Log the fetched data for debugging
+            error_log("Fetched book data: " . print_r($row, true));
+
             // Return the book data as JSON
             echo json_encode($row);
         } else {

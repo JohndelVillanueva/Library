@@ -1,8 +1,8 @@
 <?php
-include 'includes/session.php'; // Include your session and DB connection
+include 'includes/session.php'; 
 
 if (isset($_POST['edit'])) {
-    // Ensure that data is sanitized/validated as needed to avoid SQL injection or other issues
+
     $bookId = $_POST['id'];
     $books = $_POST['book_id'];
     $title = $_POST['title'];
@@ -10,15 +10,11 @@ if (isset($_POST['edit'])) {
     $author = $_POST['author'];
     $donate = $_POST['donate'];
 
-
-
-    // // Check if bookId is provided and valid
+    // Check if bookId is provided and valid
     // if (empty($bookId)) {
     //     echo "Invalid book ID.";
     //     exit();
     // }
-
-    // Validate other fields if necessary...
 
     // Query to update the book details
     $sql = "UPDATE books b  SET b.book_id = ?, b.title = ?, b.category_id = ?, b.author = ?, b.donate = ? WHERE b.id = ?";
@@ -30,19 +26,18 @@ if (isset($_POST['edit'])) {
         echo "An error occurred. Please try again.";
         exit();
     }
-
     // Bind parameters with the correct types
     $stmt->bind_param('sssssi', $books, $title, $category, $author, $donate, $bookId);
 
     // Execute the query and handle the result
     if ($stmt->execute()) {
-        echo "Book ID: " . $bookId . "<br>";
-        echo "Books: " . $books . "<br>";
-        echo "Title: " . $title . "<br>";
-        echo "Category: " . $category . "<br>";
-        echo "Author: " . $author . "<br>";
-        echo "Donate: " . $donate . "<br>";
-        die();
+        // echo "Book ID: " . $bookId . "<br>";
+        // echo "Books: " . $books . "<br>";
+        // echo "Title: " . $title . "<br>";
+        // echo "Category: " . $category . "<br>";
+        // echo "Author: " . $author . "<br>";
+        // echo "Donate: " . $donate . "<br>";
+        // die();
         // Redirect to the book listing page after a successful update
         header("Location: book.php");
         exit();
@@ -51,7 +46,6 @@ if (isset($_POST['edit'])) {
         error_log("Error updating book: " . $stmt->error);
         echo "An error occurred while updating the book. Please try again.";
     }
-
 
     // Close the statement
     $stmt->close();

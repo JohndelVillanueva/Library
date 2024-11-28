@@ -107,19 +107,22 @@
                         $status = '<span class="label label-success">available</span>';
                       }
                       echo "
-                        <tr>
-                          <td>".$row['name']."</td>
-                          <td>".$row['book_id']."</td>
-                          <td>".$row['title']."</td>
-                          <td>".$row['author']."</td>
-                          <td>".$row['donate']."</td>
-                          <td>".$status."</td>
-                          <td>
-                            <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['book']."'><i class='fa fa-edit'></i> Edit</button>
-                            <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['id']."'><i class='fa fa-trash'></i> Delete</button>
-                          </td>
-                        </tr>
-                      ";
+                      <tr>
+                        <td>".$row['name']."</td>
+                        <td>".$row['book_id']."</td>
+                        <td>".$row['title']."</td>
+                        <td>".$row['author']."</td>
+                        <td>".$row['donate']."</td>
+                        <td>".$status."</td>
+                        <td>
+                          <button class='btn btn-success btn-sm edit btn-flat' data-id='".$row['book']."' id='editBtn'>
+                            <i class='fa fa-edit'></i> Edit
+                          </button>
+                          <button class='btn btn-danger btn-sm delete btn-flat' data-id='".$row['book']."'>
+                            <i class='fa fa-trash'></i> Delete
+                          </button>
+                        </td>
+                      </tr>";
                     }
                   ?>
                 </tbody>
@@ -138,19 +141,21 @@
 </div>
 <?php include 'includes/scripts.php'; ?>
 <script>
-  $(document).on('click', '.edit', function(e){
+$(document).on('click', '.edit', function(e) {
     e.preventDefault();
     $('#edit').modal('show');
     var id = $(this).data('id');
+    console.log('Fetching book data for ID:', id); // Log the ID
     getRow(id);
-  });
+});
 
-  $(document).on('click', '.delete', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
+$(document).ready(function() {
+    $('.delete').click(function() {
+        var id = $(this).data('id');
+        $('#delete_id').val(id); // Set the hidden input's value
+        $('#delete').modal('show'); // Show the modal
+    });
+});
 
 function getRow(id) {
   $.ajax({
@@ -167,7 +172,7 @@ function getRow(id) {
         $('#id').val(response.id);  // Make sure 'id' is populated here
         $('#edit_isbn').val(response.book_id);
         $('#edit_title').val(response.title);
-        $('#category').val(response.category_id);  // Make sure to set the category correctly
+        $('#category').val(response.category_id).change();
         $('#edit_author').val(response.author);
         $('#edit_donate').val(response.donate);
       } else {
