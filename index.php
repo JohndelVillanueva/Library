@@ -1,5 +1,4 @@
 <?php include 'includes/session.php'; 
-include 'includes/header.php';
 ?>
 <?php
     $where = '';
@@ -22,8 +21,8 @@ include 'includes/header.php';
 </head>
 <body>
     <div class="container">
-        <img src="logomalino.png" alt="logo">
-        <h1>Malino National High School Library Management System</h1>
+        <img src="Westfields Badge.png" alt="logo">
+        <h1>Westfields International School</h1>
         <?php
             if (isset($_SESSION['error'])) {
                 echo "
